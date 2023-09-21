@@ -163,6 +163,45 @@ def normalizeData():
         mainMethod()
     return data
 
+# Checking for imblanced Data and also solving
+def balanceAndCheckData(data):
+    print("Which one is the target class?")
+    print("Column Names: ", data.columns)
+    className = input("Answer Here (enter the name of the target class column): ")
+
+    if className not in data.columns:
+        print(f"Column '{className}' not found in the dataset.")
+        return
+
+    class_counts = data[className].value_counts()
+
+    if len(class_counts) != 2:
+        print("Target class should have exactly two unique values for binary classification.")
+        return
+
+    majority_class = class_counts.idxmax()
+    minority_class = class_counts.idxmin()
+
+    if class_counts[majority_class] > class_counts[minority_class]:
+        imbalance_ratio = class_counts[majority_class] / class_counts[minority_class]
+    else:
+        imbalance_ratio = class_counts[minority_class] / class_counts[majority_class]
+
+    print(f"Majority Class: {majority_class}")
+    print(f"Minority Class: {minority_class}")
+    print(f"Imbalance Ratio: {imbalance_ratio:.2f}")
+
+    if imbalance_ratio > 5.0:  # You can adjust this threshold as needed
+        print("Data is Imbalanced")
+    else:
+        print("Data is Balanced")
+
+
+
+
+
+
+
 def mainMethod():
     global data
     line()
@@ -180,8 +219,11 @@ def mainMethod():
     print("11) Remove Column")
     print("12) Check for feature Selection (not yet implemented)")
     print("13) Normalization")
-    print("14) Handle Imbalanced Data")
-    print("15) Export Data set")
+    print("14) Balance Data")
+    print("15) Handle Imbalanced Data")
+    print("16) Export Data set")
+
+
     line()
     choice = input("Answer here (1,2,3...): ")
     if choice == "1":
@@ -245,9 +287,13 @@ def mainMethod():
         mainMethod()
     elif choice == "14":
         line()
-        print("Handle imbalance data")
+        data = balanceAndCheckData(data)
         mainMethod()
     elif choice == "15":
+        line()
+        print("Handle imbalance data")
+        mainMethod()
+    elif choice == "16":
         line()
         print("exporting Phase")
         data.to_csv("Final_Data.csv", index=False)
