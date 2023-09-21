@@ -41,7 +41,7 @@ def checkingForNumericalValue():
     except pd.errors:
         print("Error Occured: ", pd.errors)
 
-
+    return data
 
 # displaying both the vlues (String, and Numeric)
 def displayingColumns(stringColumns, numericColumns):
@@ -49,7 +49,7 @@ def displayingColumns(stringColumns, numericColumns):
     print("String Columns: ", stringColumns)
     print("Task 02#: Successfull")
     line()
-
+    return data
 
 
 # checking for cetagorical values
@@ -64,7 +64,7 @@ def checkForCetagoricalValues():
             print("Task 03#: Checking for categorical values : Successfull")
             line()
             return False
-
+    return data
 
 
 # Checking for string values
@@ -74,6 +74,7 @@ def checkForStringValues():
     else:
         print("Still have String values")
         noString = True
+    return data
 
 
 
@@ -113,6 +114,8 @@ def doingOneHotEncoding(data):
         mainMethod()
         line()
 
+    return data
+
 
 def removalOfColumn(namesOfColumnsWantsToConvert):
     line()
@@ -126,15 +129,17 @@ def removalOfColumn(namesOfColumnsWantsToConvert):
     else:
         print("No Column Selected")
     line()
+    return data
 
 
 
 def checkForNullValues():
     print("Sum of total Null values: ", data.isnull().sum())
-
+    return data
 
 def fillNullValues():
     print(data.fillna(0, inplace=True))
+    return data
 
 
 def normalizeData():
@@ -156,82 +161,104 @@ def normalizeData():
     else:
         print("No Columns selected")
         mainMethod()
+    return data
 
-
-def mainMethod():
+def mainMethod(data):
     line()
     print("The Following operations could be done:")
-    print("1) Remove Column")
-    print("2) Manage categorical Values (One oHot Encoding)")
-    print("3) Check for Null Values")
-    print("4) Fill null values with Mean")
-    print("5) Check for String Values (if any)")
-    print("6) Drop duplicate Values (if any)")
-    print("7) Check for feature Selection (not yet implemented)")
-    print("8) Show Columns Names")
-    print("9) Normalization")
-    print("10) Handle Imbalanced Data")
-    print("11) Display Dataset")
-    print("12) Export Data set")
+    print("1) Display Dataset")
+    print("2) SHape of Data")
+    print("3) Describe Data")
+    print("4) Information of Data")
+    print("5) Show Columns Names")
+    print("6) Check for Null Values")
+    print("7) Fill null values with Mean")
+    print("8) Manage categorical Values (One oHot Encoding)")
+    print("9) Check for String Values (if any)")
+    print("10) Drop duplicate Values (if any)")
+    print("11) Remove Column")
+    print("12) Check for feature Selection (not yet implemented)")
+    print("13) Normalization")
+    print("14) Handle Imbalanced Data")
+    print("15) Export Data set")
     line()
     choice = input("Answer here (1,2,3...): ")
     if choice == "1":
         line()
-        print("removing Phase")
-        removalOfColumn(namesOfColumnsWantsToConvert)
-        mainMethod()
+        print("All Data", data.head(5))
+        mainMethod(data)
     elif choice == "2":
         line()
-        print("Categorical Phase")
-        doingOneHotEncoding(data)
-        mainMethod()
+        print("Null Values Phase")
+        print(data.shape)
+        mainMethod(data)
     elif choice == "3":
         line()
-        print("Null Values Phase")
-        checkForNullValues()
-        mainMethod()
+        print("Filling Null values Phase")
+        print(data.describe())
+        mainMethod(data)
     elif choice == "4":
         line()
-        print("Filling Null values Phase")
-        fillNullValues()
-        mainMethod()
-        mainMethod()
+        print("Categorical Phase")
+        print(data.info)
+        mainMethod(data)
     elif choice == "5":
         line()
         print("String Values Phase")
-        checkForStringValues()
+        print(data.columns)
+        mainMethod(data)
     elif choice == "6":
         line()
-        data.drop_duplicates()
-        mainMethod()
+        data = checkForNullValues()
+        mainMethod(data)
     elif choice == "7":
         line()
-        print("features selection Phase")
+        data = fillNullValues()
+        mainMethod(data)
     elif choice == "8":
         line()
-        print(data.columns)
-        mainMethod()
+        data = doingOneHotEncoding(data)
+        print("features selection Phase")
+        mainMethod(data)
     elif choice == "9":
         line()
         print("Normalization Phase")
-        normalizeData()
-        mainMethod()
-    elif choice  == "10":
+        data = checkForStringValues()
+        mainMethod(data)
+    elif choice == "10":
         line()
-        print("All Data", data.head(5))
-        mainMethod()
+        print("Dropping Values")
+        mainMethod(data)
     elif choice == "11":
         line()
-        print("export Phase")
-        mainMethod()
+        print("removing Phase")
+        data = removalOfColumn(namesOfColumnsWantsToConvert)
+        mainMethod(data)
+    elif choice == "12":
+        line()
+        print("Checking for features selection")
+        mainMethod(data)
+    elif choice == "13":
+        line()
+        data = normalizeData()
+        mainMethod(data)
+    elif choice == "14":
+        line()
+        print("Handle imbalance data")
+        mainMethod(data)
+    elif choice == "15":
+        line()
+        print("exporting Phase")
+        data.to_csv("Final_Data.csv", index=False)
+        mainMethod(data)
     else:
         line()
         print("You chose nothing...")
         mainMethod()
 
+    return data
 
 
 
-
-mainMethod()
+mainMethod(data)
 
