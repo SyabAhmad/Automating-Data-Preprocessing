@@ -14,7 +14,7 @@ try:
     print("Task 01# Data read: Successfull")
     line()
 except FileNotFoundError:
-    print("File Not FOund Error")
+    print("File Not Found Error")
     print("Task 01# Data read: Un-Successfull")
     line()
 except pd.errors.EmptyDataError:
@@ -163,7 +163,8 @@ def normalizeData():
         mainMethod()
     return data
 
-def mainMethod(data):
+def mainMethod():
+    global data
     line()
     print("The Following operations could be done:")
     print("1) Display Dataset")
@@ -186,71 +187,71 @@ def mainMethod(data):
     if choice == "1":
         line()
         print("All Data", data.head(5))
-        mainMethod(data)
+        mainMethod()
     elif choice == "2":
         line()
         print("Null Values Phase")
         print(data.shape)
-        mainMethod(data)
+        mainMethod()
     elif choice == "3":
         line()
         print("Filling Null values Phase")
         print(data.describe())
-        mainMethod(data)
+        mainMethod()
     elif choice == "4":
         line()
         print("Categorical Phase")
         print(data.info)
-        mainMethod(data)
+        mainMethod()
     elif choice == "5":
         line()
         print("String Values Phase")
         print(data.columns)
-        mainMethod(data)
+        mainMethod()
     elif choice == "6":
         line()
         data = checkForNullValues()
-        mainMethod(data)
+        mainMethod()
     elif choice == "7":
         line()
         data = fillNullValues()
-        mainMethod(data)
+        mainMethod()
     elif choice == "8":
         line()
         data = doingOneHotEncoding(data)
         print("features selection Phase")
-        mainMethod(data)
+        mainMethod()
     elif choice == "9":
         line()
         print("Normalization Phase")
         data = checkForStringValues()
-        mainMethod(data)
+        mainMethod()
     elif choice == "10":
         line()
-        print("Dropping Values")
-        mainMethod(data)
+        print("Dropping Duplicate Values")
+        mainMethod()
     elif choice == "11":
         line()
         print("removing Phase")
         data = removalOfColumn(namesOfColumnsWantsToConvert)
-        mainMethod(data)
+        mainMethod()
     elif choice == "12":
         line()
         print("Checking for features selection")
-        mainMethod(data)
+        mainMethod()
     elif choice == "13":
         line()
         data = normalizeData()
-        mainMethod(data)
+        mainMethod()
     elif choice == "14":
         line()
         print("Handle imbalance data")
-        mainMethod(data)
+        mainMethod()
     elif choice == "15":
         line()
         print("exporting Phase")
         data.to_csv("Final_Data.csv", index=False)
-        mainMethod(data)
+        mainMethod()
     else:
         line()
         print("You chose nothing...")
@@ -260,5 +261,5 @@ def mainMethod(data):
 
 
 
-mainMethod(data)
+mainMethod()
 
