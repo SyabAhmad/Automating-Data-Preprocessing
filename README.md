@@ -1,8 +1,8 @@
 # Data Preprocessing Automation
 
-![GitHub repo size](https://img.shields.io/github/repo-size/SyabAhmad/Automation-Data-Preprocessing)
-![GitHub stars](https://img.shields.io/github/stars/SyabAhmad/Automation-Data-Preprocessing?style=social)
-![GitHub forks](https://img.shields.io/github/forks/SyabAhmad/Automation-Data-Preprocessing?style=social)
+![GitHub repo size](https://img.shields.io/github/repo-size/SyabAhmad/Automating-Data-Preprocessing)
+![GitHub stars](https://img.shields.io/github/stars/SyabAhmad/Automating-Data-Preprocessing?style=social)
+![GitHub forks](https://img.shields.io/github/forks/SyabAhmad/Automating-Data-Preprocessing?style=social)
 
 
 
